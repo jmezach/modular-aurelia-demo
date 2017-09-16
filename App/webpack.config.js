@@ -34,6 +34,9 @@ module.exports = (env) => {
             }),
             new powerTools.NamedDelegatedModulesPlugin(),
             new webpack.NamedModulesPlugin(),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: ['common']
+            }),
             new AureliaPlugin({ aureliaApp: 'boot' })
         ].concat(isDevBuild ? [
             new webpack.SourceMapDevToolPlugin({
