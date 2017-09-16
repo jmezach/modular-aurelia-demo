@@ -48,7 +48,8 @@ module.exports = ({ prod } = {}) => {
             new webpack.DllPlugin({
                 path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
                 name: '[name]_[hash]'
-            })
+            }),
+            new webpack.NamedModulesPlugin()
         ].concat(isDevBuild ? [] : [
             new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
         ])

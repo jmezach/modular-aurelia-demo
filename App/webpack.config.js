@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const powerTools = require('webpack-powertools');
 const { AureliaPlugin } = require('aurelia-webpack-plugin');
 const bundleOutputDir = './wwwroot/dist';
 
@@ -31,6 +32,8 @@ module.exports = (env) => {
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
             }),
+            new powerTools.NamedDelegatedModulesPlugin(),
+            new webpack.NamedModulesPlugin(),
             new AureliaPlugin({ aureliaApp: 'boot' })
         ].concat(isDevBuild ? [
             new webpack.SourceMapDevToolPlugin({
