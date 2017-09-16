@@ -27,6 +27,7 @@
     "typescript": "^2.2.2",
     "url-loader": "^0.5.8",
     "webpack": "^2.3.3",
-    "webpack-hot-middleware": "^2.18.0"
+    "webpack-hot-middleware": "^2.18.0",
+    "webpack-powertools": "file:///Users/jmezach/Projects/open-source/webpack-powertools"
   }
 }

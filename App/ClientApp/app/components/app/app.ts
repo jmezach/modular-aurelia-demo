@@ -24,6 +24,15 @@ export class App {
             title: 'Module 1'
         }]);
 
+        config.map([{
+            route: 'module2',
+            name: 'module2',
+            settings: { icon: 'star' },
+            moduleId: 'app/components/module2/module2',
+            nav: true,
+            title: 'Module 2'
+        }]);
+
         this.router = router;
     }
 }
