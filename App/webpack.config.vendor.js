@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var { AureliaPlugin } = require('aurelia-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('vendor.css');
 
 module.exports = ({ prod } = {}) => {
@@ -19,18 +20,8 @@ module.exports = ({ prod } = {}) => {
         },
         entry: {
             vendor: [
-                'aurelia-event-aggregator',
-                'aurelia-fetch-client',
-                'aurelia-framework',
-                'aurelia-history-browser',
-                'aurelia-logging-console',
-                'aurelia-pal-browser',
-                'aurelia-polyfills',
-                'aurelia-route-recognizer',
+                'aurelia-bootstrapper',
                 'aurelia-router',
-                'aurelia-templating-binding',
-                'aurelia-templating-resources',
-                'aurelia-templating-router',
                 'bootstrap',
                 'bootstrap/dist/css/bootstrap.css',
                 'jquery'
@@ -43,13 +34,16 @@ module.exports = ({ prod } = {}) => {
             library: '[name]_[hash]',
         },
         plugins: [
+            new webpack.NamedModulesPlugin(),
             extractCSS,
             new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new webpack.DllPlugin({
                 path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
                 name: '[name]_[hash]'
             }),
-            new webpack.NamedModulesPlugin()
+            new AureliaPlugin({
+                aureliaApp: undefined,
+            }),
         ].concat(isDevBuild ? [] : [
             new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
         ])

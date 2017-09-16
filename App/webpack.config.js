@@ -27,13 +27,13 @@ module.exports = (env) => {
             ]
         },
         plugins: [
+            new powerTools.NamedDelegatedModulesPlugin(),
+            new webpack.NamedModulesPlugin(),
             new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(isDevBuild) }),
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
             }),
-            new powerTools.NamedDelegatedModulesPlugin(),
-            new webpack.NamedModulesPlugin(),
             new webpack.optimize.CommonsChunkPlugin({
                 name: ['common']
             }),
