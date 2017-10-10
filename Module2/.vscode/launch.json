@@ -5,6 +5,14 @@
    "version": "0.2.0",
    "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceRoot}/ClientApp",
+            "userDataDir": "${workspaceRoot}/.vscode/chrome-profile"
+        },
+        {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
@@ -15,6 +23,7 @@
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
+            /*
             "launchBrowser": {
                 "enabled": true,
                 "args": "${auto-detect-url}",
@@ -29,6 +38,7 @@
                     "command": "xdg-open"
                 }
             },
+            */
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
@@ -41,6 +51,12 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Server/Client",
+            "configurations": [ ".NET Core Launch (web)", "Launch Chrome" ]
         }
     ]
 }
